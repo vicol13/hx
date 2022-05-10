@@ -10,4 +10,6 @@ STOP_WORDS = set(["i", "me", "my", "myself", "we", "our", "ours", "ourselves", "
 
 
 # absolute path to the corpus with documents
-CORPUS_PATH = '/Users/vicol/Desktop/hx/corpus/'
+# path is absolute in case if we will want to use an external corpus
+# notice: add slash at the end 
+CORPUS_PATH = '*/hx/corpus/'

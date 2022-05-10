@@ -26,15 +26,18 @@ return sentence where this word was found grouped by article name.
 ```
 ---
 ## Set up the project
-1. create virtual environment
+1. update the absolute path to the corpus in :
+```search_engine/core/config.py```
+
+2. create virtual environment
 ```shell
 python3 -m venv venv/
 ```
-2. enter virtual environment
+3. enter virtual environment
 ```shell
 source venv/bin/activate
 ```
-3. install dependencies 
+4. install dependencies 
 ```shell
 pip3 install requirements.txt
 ```
