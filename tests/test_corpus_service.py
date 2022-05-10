@@ -35,5 +35,6 @@ def test_load_corpus_root_dir_is_empty():
     # when
     with pytest.raises(EmptyCorpusException) as ctx:
         [x for x in service.load_corpus()]
+   
     # then 
     assert "empty corpus at" in str(ctx.value)

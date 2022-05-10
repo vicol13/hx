@@ -35,6 +35,7 @@ def test_search_of_word_which_exist_in_corpus():
     
 
 def test_earch_of_missing_word():
+    # given
     f1_name,f1_doc = 'Java and python','Java is bad. Python is not better.'
     f2_name,f2_doc = 'Introducing Kotlin', 'Kotlin has some benefits'
     
@@ -45,5 +46,6 @@ def test_earch_of_missing_word():
     # when 
     engine = Engine(corpus_service = corpus_service, preprocessor = preprocesing_service)
     
+    # then
     r1 = engine.search('rust')
     assert len(r1) == 0
