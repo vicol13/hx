@@ -2,7 +2,7 @@
 ![alt text](media/logo.png)
 
 # Search engine 
-This repository represents the task from hyperexponential realized by valeriu vicol, as task of the task I decide to implement a small search_engine
+This repository represents the task from hyperexponential realized by valeriu vicol, the task I decide to implement a small search_engine
 on some random text blocks from random medium articles. Core algorithm used for current implementation inverted index. Idea of the search is that we type a word and the algorithm
 return sentence where this word was found grouped by article name.
 
