@@ -8,13 +8,26 @@ import abc
 
 class AbstractCorpusService:
     """
-        defines contract for corpus services
+        defines contract for corpus services which should load the data into memory
     """
 
     @abc.abstractclassmethod
     def load_corpus(self)-> Generator[Tuple[str, str], None, None]:
+        """
+            creates a generetor for files/sql-row/no-sql inside the corpus folder
+            
+            :param root_folder: path to corpus folder
+            :rtype Iterator for file name and file content
+        """
         raise NotImplementedError("Call on abstraction method of AbstractCorpusService")
 
+
+    @abc.abstractclassmethod
+    def load_document(self,doc_name:str)->str:
+        """
+            should return the document by name
+        """
+        raise NotImplementedError("Call on abstraction method of AbstractCorpusService")
 
 
 class TextCorpusService(AbstractCorpusService):
@@ -28,10 +41,7 @@ class TextCorpusService(AbstractCorpusService):
 
     def load_corpus(self) -> Tuple[str, str]:
         """
-            creates a generetor for files inside the corpus folder
-            
-            :param root_folder: path to corpus folder
-            :rtype Iterator for file name and file content
+            list files from folder and preprocess them
         """
         root_len = len(self._corpus_path)
         files_path = glob.glob(f'{self._corpus_path}*.txt')
@@ -43,10 +53,10 @@ class TextCorpusService(AbstractCorpusService):
        
         for path in files_path:
             file_name = path[root_len:-4]
-            yield file_name, self.load_file(file_name)
+            yield file_name, self.load_document(file_name)
 
     
-    def load_file(self, name: str) -> str:
+    def load_document(self, name: str) -> str:
         with open(f'{self._corpus_path}{name}.txt') as file:
             return file.read().replace('\n', '')
             
