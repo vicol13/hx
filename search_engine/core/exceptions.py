@@ -1,0 +1,4 @@
+
+
+class EmptyCorpusException(Exception):
+    pass
