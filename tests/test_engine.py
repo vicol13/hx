@@ -14,7 +14,7 @@ def test_search_of_word_which_exist_in_corpus():
     corpus_service = MagicMock()
     preprocesing_service = RawPreprocesingService()
     corpus_service.load_corpus.return_value =  iter([(f1_name,f1_doc),(f2_name,f2_doc)])
-    corpus_service.load_file.side_effect = ['Java is bad. Python is not better.','Kotlin has some benefits']
+    corpus_service.load_document.side_effect = ['Java is bad. Python is not better.','Kotlin has some benefits']
 
     engine = Engine(corpus_service = corpus_service, preprocessor = preprocesing_service)
     

@@ -39,7 +39,7 @@ class Engine:
         for file, phrase_range in word_metadata:
 
             try:
-                doc = self._corpus_service.load_file(file)
+                doc = self._corpus_service.load_document(file)
             except IOError:
                 logger.error(f'file {file} is missing from corpus')
                 return {}

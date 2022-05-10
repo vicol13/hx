@@ -3,13 +3,13 @@ from search_engine.services.corpus_service import TextCorpusService
 import pytest
 from .config import TEST_CORPUS_1,TEST_CORPUS_2,TEST_CORPUS_3
 
-def test_load_file():
+def test_load_document():
     # given
     service = TextCorpusService(corpus_path=TEST_CORPUS_1)
     expected_output = "test corpus1. second random phrase."
     
     # when
-    loaded_file = service.load_file('file1')
+    loaded_file = service.load_document('file1')
     
     # then
     assert expected_output == loaded_file, "content of file don't match with expected output"
