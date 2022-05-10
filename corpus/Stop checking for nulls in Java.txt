@@ -1,0 +1,1 @@
+The biggest problem I had coming back to Java was that I had to deal with the NullPointerException again — not really, you always need to sanitize input and output. Explicitly checking for nulls all the time is going to make your high-level code look lower-level than it is, and your low-level code even harder for others to understand.
