@@ -8,8 +8,8 @@ from typing import DefaultDict, Set
 
 class Engine:
     """
-        core class of the project which load the corpus, preprocess it, and store in memory
-        reversed index 
+        core class of the project which load the corpus, preprocess it, 
+        and store in memory inverted index 
     """
 
     def __init__(self, corpus_service=TextCorpusService(), preprocessor=RawPreprocesingService()):
