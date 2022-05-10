@@ -76,9 +76,9 @@ which will improve the accuracy of search_engine are listed bellow:
     Instead of splitting sentence by '.', we should use a tokenizer as it takes into account other symbols.
     ```nltk``` tokenizer is a good choice for current task. 
 
-2. **Use a word stemming**
+2. **Use a word stemming or lemmatizer**
 
-    In current example algorithm won't make difference between cloud and clouds and will index them as 2 different words. In order to avoid it we should use a word stemming for 
+    In current example algorithm won't make difference between cloud and clouds and will index them as 2 different words. In order to avoid it we should use a word stemming or lemmatizer for 
     indexed word and for words on which we are searching. Like this we will increase the accuracy of the engine. ```nltk``` also have this functionality
 
 3. **Implement fuzzy search**
