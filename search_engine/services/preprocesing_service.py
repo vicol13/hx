@@ -1,5 +1,6 @@
 from collections import defaultdict
 from search_engine.core.config import STOP_WORDS
+from typing import DefaultDict, Set
 
 
 class PreprocesingService:
@@ -10,7 +11,7 @@ class PreprocesingService:
                 needed for python implementation
     """
 
-    def process(self, doc_name: str, doc: str, dictionary: defaultdict = defaultdict(set)) -> str:
+    def process(self, doc_name: str, doc: str, dictionary: DefaultDict[str, Set] = defaultdict(set)) -> DefaultDict[str, Set]:
         """
             parse the document remove stop words and return inverted index of document
             :rparam doc:   input string which will be tokenized 
