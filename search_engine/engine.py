@@ -22,12 +22,14 @@ class Engine:
             self._preprocessor.process(name, doc, self._index)
         logger.debug('indexing finished')
 
+    
     def search(self, word: str) -> dict:
         word = word.lower()
         if word not in self._index.keys():
             return {}
         return self._colect_entries(word)
 
+    
     def _colect_entries(self, word: str) -> DefaultDict[str, Set]:
         """
             function which will extract the sentence from files based on key word,
