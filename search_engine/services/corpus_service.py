@@ -1,14 +1,25 @@
 import glob
-from typing import Tuple
+from typing import Tuple,Generator
 from search_engine.core.exceptions import EmptyCorpusException
 from search_engine.core.config import CORPUS_PATH
 from loguru import logger
-class CorpusService:
-    """
-        class which responsability is to interact with files/corpus
+import abc
 
-        note:   ideally this class should have an interface contract but is not
-                needed for python implementation
+
+class AbstractCorpusService:
+    """
+        defines contract for corpus services
+    """
+
+    @abc.abstractclassmethod
+    def load_corpus(self)-> Generator[Tuple[str, str], None, None]:
+        raise NotImplementedError("Call on abstraction method of AbstractCorpusService")
+
+
+
+class TextCorpusService(AbstractCorpusService):
+    """
+        implementation of AbstractCorpusService which load files/corpus from a folder 
     """
 
     def __init__(self, corpus_path: str = CORPUS_PATH):
