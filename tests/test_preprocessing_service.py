@@ -1,11 +1,10 @@
 
 from collections import defaultdict
-from search_engine.services.preprocesing_service import PreprocesingService
-
+from search_engine.services.preprocesing_service import RawPreprocesingService
 
 def test_preprocessing():
     # given 
-    service = PreprocesingService()
+    service = RawPreprocesingService()
     input = 'Java is bad. Python is not better.'
 
     # when 
@@ -32,7 +31,7 @@ def test_preprocessing():
 
 def test_word_is_indexed_more_than_one_time():
     # given
-    output = PreprocesingService().process('file','Java is bad. Python is not better than Java.',defaultdict(set))
+    output = RawPreprocesingService().process('file','Java is bad. Python is not better than Java.',defaultdict(set))
 
     # then
     assert ('file',(0,11)) in output['java'], f'sentence is not indexed in the right way'
@@ -42,7 +41,7 @@ def test_word_is_indexed_more_than_one_time():
 
 def test_check_if_fun_is_updating_existing_dict():
     # given 
-    service = PreprocesingService()
+    service = RawPreprocesingService()
     
     # when
     output = service.process('file','Java is bad. Python is not better.',defaultdict(set))

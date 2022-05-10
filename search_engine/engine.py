@@ -1,6 +1,7 @@
 from collections import defaultdict
-from search_engine.services.corpus_service import CorpusService
-from search_engine.services.preprocesing_service import PreprocesingService
+from typing import DefaultDict
+from search_engine.services.corpus_service import TextCorpusService,AbstractCorpusService
+from search_engine.services.preprocesing_service import RawPreprocesingService,AbstractPreprocesingService
 from loguru import logger
 from typing import DefaultDict, Set
 
@@ -11,10 +12,10 @@ class Engine:
         reversed index 
     """
 
-    def __init__(self, corpus_service=CorpusService(), preprocessor=PreprocesingService()):
-        self._corpus_service:CorpusService = corpus_service
-        self._preprocessor:PreprocesingService = preprocessor
-        self._index = defaultdict(set)
+    def __init__(self, corpus_service=TextCorpusService(), preprocessor=RawPreprocesingService()):
+        self._corpus_service:AbstractCorpusService = corpus_service
+        self._preprocessor:AbstractPreprocesingService = preprocessor
+        self._index:DefaultDict[str, set]  = defaultdict(set)
 
         logger.debug('indexing corpus')
         for name, doc in self._corpus_service.load_corpus():
@@ -22,10 +23,10 @@ class Engine:
         logger.debug('indexing finished')
 
     def search(self, word: str) -> dict:
-        _word = word.lower()
-        if _word not in self._index.keys():
+        word = word.lower()
+        if word not in self._index.keys():
             return {}
-        return self._colect_entries(_word)
+        return self._colect_entries(word)
 
     def _colect_entries(self, word: str) -> DefaultDict[str, Set]:
         """

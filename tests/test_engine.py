@@ -1,6 +1,6 @@
 from search_engine.engine import Engine
-from search_engine.services.corpus_service import CorpusService
-from search_engine.services.preprocesing_service import PreprocesingService
+from search_engine.services.corpus_service import TextCorpusService
+from search_engine.services.preprocesing_service import RawPreprocesingService
 from unittest.mock import MagicMock
 
 
@@ -12,7 +12,7 @@ def test_search_of_word_which_exist_in_corpus():
     f2_name,f2_doc = 'Introducing Kotlin', 'Kotlin has some benefits'
     
     corpus_service = MagicMock()
-    preprocesing_service = PreprocesingService()
+    preprocesing_service = RawPreprocesingService()
     corpus_service.load_corpus.return_value =  iter([(f1_name,f1_doc),(f2_name,f2_doc)])
     corpus_service.load_file.side_effect = ['Java is bad. Python is not better.','Kotlin has some benefits']
 
@@ -40,7 +40,7 @@ def test_earch_of_missing_word():
     f2_name,f2_doc = 'Introducing Kotlin', 'Kotlin has some benefits'
     
     corpus_service = MagicMock()
-    preprocesing_service = PreprocesingService()
+    preprocesing_service = RawPreprocesingService()
     corpus_service.load_corpus.return_value =  iter([(f1_name,f1_doc),(f2_name,f2_doc)])
     
     # when 

@@ -1,11 +1,11 @@
 from search_engine.core.exceptions import EmptyCorpusException
-from search_engine.services.corpus_service import CorpusService
+from search_engine.services.corpus_service import TextCorpusService
 import pytest
 from .config import TEST_CORPUS_1,TEST_CORPUS_2,TEST_CORPUS_3
 
 def test_load_file():
     # given
-    service = CorpusService(corpus_path=TEST_CORPUS_1)
+    service = TextCorpusService(corpus_path=TEST_CORPUS_1)
     expected_output = "test corpus1. second random phrase."
     
     # when
@@ -16,7 +16,7 @@ def test_load_file():
 
 def test_load_corpus():
     # given
-    service = CorpusService(corpus_path=TEST_CORPUS_2)
+    service = TextCorpusService(corpus_path=TEST_CORPUS_2)
     expected_corpus = [('file1','test corpus1. second random phrase.'),('file2','test corpus2. random phrase of second corpus.')]
     
     # when
@@ -30,7 +30,7 @@ def test_load_corpus():
 
 def test_load_corpus_root_dir_is_empty():
     # given
-    service = CorpusService(corpus_path=TEST_CORPUS_3)
+    service = TextCorpusService(corpus_path=TEST_CORPUS_3)
     
     # when
     with pytest.raises(EmptyCorpusException) as ctx:
