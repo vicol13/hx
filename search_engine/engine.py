@@ -14,17 +14,15 @@ class Engine:
         self._preprocessor = preprocessor
         self._index = defaultdict(set)
         
-
+        logger.debug('indexing corpus')
         for name,doc in self._corpus_service.load_corpus():
-            logger.debug('indexing corpus')
             self._preprocessor.process(name,doc,self._index)
-    
+        logger.debug('indexing finished')
     
     def search(self,word:str)->dict:
         _word = word.lower()
         if _word not in self._index.keys():
             return {}
-        
         return self._colect_entries(_word)
         
        

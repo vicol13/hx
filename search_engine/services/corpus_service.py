@@ -2,7 +2,7 @@ import glob
 from typing import Tuple
 from search_engine.core.exceptions import EmptyCorpusException
 from search_engine.core.config import CORPUS_PATH
-
+from loguru import logger
 class CorpusService:
     """
         class which responsability is to interact with files/corpus
@@ -24,10 +24,11 @@ class CorpusService:
         """
         root_len = len(self._corpus_path)
         files_path = glob.glob(f'{self._corpus_path}*.txt')
-    
-        # print(files_path)
+        
+
         if len(files_path) == 0:
             raise EmptyCorpusException(f"empty corpus at {self._corpus_path}")
+            
        
         for path in files_path:
             file_name = path[root_len:-4]
