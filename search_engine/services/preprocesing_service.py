@@ -4,7 +4,7 @@ from search_engine.core.config import STOP_WORDS
 
 class PreprocesingService:
     """
-        class which is responsible for tokenization of documents and then mapping to reversed index map
+        class which is responsible for tokenization of documents and then mapping to inverted index map
 
         note:   ideally this class should have an interface contract but is not
                 needed for python implementation
@@ -12,7 +12,7 @@ class PreprocesingService:
 
     def process(self, doc_name: str, doc: str, dictionary: defaultdict = defaultdict(set)) -> str:
         """
-            parse the document remove stop words and return reversed index of document
+            parse the document remove stop words and return inverted index of document
             :rparam doc:   input string which will be tokenized 
             :rparam dictionary: represent a default map in case when we want to get new index for current document
                                 or to update and existing index with this document 
