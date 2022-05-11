@@ -42,7 +42,7 @@ class Engine:
 
             try:
                 doc = self._corpus_service.load_document(file)
-            except IOError:
+            except FileNotFoundError:
                 logger.error(f'file {file} is missing from corpus')
                 return {}
 
