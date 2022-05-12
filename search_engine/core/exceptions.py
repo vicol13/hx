@@ -1,4 +1,2 @@
-
-
 class EmptyCorpusException(Exception):
     pass
