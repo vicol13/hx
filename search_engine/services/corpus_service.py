@@ -1,9 +1,11 @@
-from typing import Tuple, Generator
+from typing import Tuple, Generator,Protocol
+from pathlib import Path
+from loguru import logger
 from search_engine.core.exceptions import EmptyCorpusException
 from search_engine.core.config import CORPUS_PATH
-from loguru import logger
-from pathlib import Path
-from typing import Protocol
+
+
+
 
 
 class AbstractCorpusService(Protocol):
@@ -16,18 +18,16 @@ class AbstractCorpusService(Protocol):
         Creates a generetor for files/sql-row/no-sql corpus
         :rtype Generator for file name and file content
         """
-        pass
 
     def load_document(self, doc_name: str) -> str:
         """
         Should return the document by name
         """
-        pass
 
 
 class TextCorpusService(AbstractCorpusService):
     """
-    Implementation of AbstractCorpusService which load files/corpus from a folder 
+    Implementation of AbstractCorpusService which load files/corpus from a folder
     """
 
     def __init__(self, corpus_path: str = CORPUS_PATH):
