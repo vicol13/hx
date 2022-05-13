@@ -1,14 +1,14 @@
 from collections import defaultdict
-from typing import DefaultDict
-from search_engine.services.corpus_service import TextCorpusService, AbstractCorpusService
-from search_engine.services.preprocesing_service import RawPreprocesingService, AbstractPreprocesingService
-from loguru import logger
 from typing import DefaultDict, Set, List
+from loguru import logger
+from search_engine.services.corpus_service import AbstractCorpusService
+from search_engine.services.preprocesing_service import AbstractPreprocesingService
+
 
 class Engine:
     """
-    Core class of the project which load the corpus, preprocess it, 
-    and store in memory inverted index 
+    Core class of the project which load the corpus, preprocess it,
+    and store in memory inverted index
     """
 
     def __init__(self, corpus_service: AbstractCorpusService, preprocessor: AbstractPreprocesingService):
@@ -18,10 +18,14 @@ class Engine:
 
         logger.debug('indexing corpus')
         for name, doc in self.__corpus_service.load_corpus():
-           self.__indicies = self.__preprocessor.process(name, doc, dictionary=self.__indicies)
+            self.__indicies = self.__preprocessor.process(name, doc, dictionary=self.__indicies)
         logger.debug('indexing finished')
 
     def search(self, word: str) -> dict:
+        """
+        Function which search in indicies for inserted word, if word
+        is not present in indicies returns empty dictionary
+        """
         word = word.lower()
         if word not in self.__indicies:
             return {}
