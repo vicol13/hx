@@ -1,4 +1,3 @@
-import glob
 from typing import Tuple, Generator
 from search_engine.core.exceptions import EmptyCorpusException
 from search_engine.core.config import CORPUS_PATH
