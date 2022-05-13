@@ -1,16 +1,15 @@
 from collections import defaultdict
 from search_engine.core.config import STOP_WORDS
 from typing import DefaultDict, Set
-import abc
+from typing import Protocol
 
 
-class AbstractPreprocesingService:
+class AbstractPreprocesingService(Protocol):
     """
-        defines the contract for preprocesing services which have to return an inverted index
+    Defines the contract for preprocesing services which have to return an inverted index
     """
 
-    @abc.abstractmethod
-    def process(self, doc_name: str, doc: str, dictionary: DefaultDict[str, Set])->DefaultDict[str, Set]:
+    def process(self, doc_name: str, doc: str, dictionary: DefaultDict[str, DefaultDict[str, Set]]) -> DefaultDict[str, DefaultDict[str, Set]]:
         """
         :rparam doc_name: name of the document
         :rparam doc:   input string which will be tokenized 
@@ -19,24 +18,28 @@ class AbstractPreprocesingService:
             
             :rtype: dictionary of next format:
             {
-                '<word>':[(<name_of_file>,(<starting_index>,<ending_index>)),...]
+                '<word>': {
+                    '<document_name> : {(<start>,<end>),(<start>,<end>)},
+                    '<document2_name> : {(<start>,<end>),(<start>,<end>)}
+                }
                 
             }
             indexes represent the begin and the end of the sentence where word had been found
         """
-        raise NotImplementedError("Call on abstraction method of AbstractPreprocesingService")
+        pass
 
 
-class RawPreprocesingService:
+class RawPreprocesingService(AbstractPreprocesingService):
     """
-        implementation AbstractPreprocesingService which does't perform any special preprocesing steps 
-        on corpus it just index each word 
+    Implementation AbstractPreprocesingService which does't perform any special preprocesing steps 
+    on corpus it just index each word 
     """
 
-    def process(self, doc_name: str, doc: str, dictionary: DefaultDict[str, Set] = defaultdict(set)) -> DefaultDict[str, Set]:
+    def process(self, doc_name: str, doc: str, dictionary: DefaultDict[str, DefaultDict[str, Set]] = None) -> DefaultDict[str, DefaultDict[str, Set]]:
         """
-            parse the document remove stop words and return inverted index of document
+        Parse the document remove stop words and return inverted index of document
         """
+        dictionary = dictionary if dictionary else defaultdict(lambda: defaultdict(set))
         starting_index = 0
 
         for phrase in doc.split('.'):
@@ -46,6 +49,6 @@ class RawPreprocesingService:
             _phrase = set(phrase.lower().split()).difference(STOP_WORDS)
 
             for word in _phrase:
-                dictionary[word].add((doc_name, (starting_index, ending_index)))
+                dictionary[word][doc_name].add((starting_index, ending_index))
             starting_index += len(phrase) + 1
         return dictionary
