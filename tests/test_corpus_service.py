@@ -37,4 +37,4 @@ def test_load_corpus_root_dir_is_empty():
         [x for x in service.load_corpus()]
    
     # then 
-    assert "empty corpus at" in str(ctx.value)
+    assert "Empty corpus at" in str(ctx.value)
