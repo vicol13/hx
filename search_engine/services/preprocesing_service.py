@@ -46,9 +46,9 @@ class RawPreprocesingService(AbstractPreprocesingService):
             ending_index = starting_index + len(phrase)
 
             # phrase as a set without stop words
-            _phrase = set(phrase.lower().split()).difference(STOP_WORDS)
+            temp_phrase = set(phrase.lower().split()).difference(STOP_WORDS)
 
-            for word in _phrase:
+            for word in temp_phrase:
                 dictionary[word][doc_name].add((starting_index, ending_index))
             starting_index += len(phrase) + 1
         return dictionary
