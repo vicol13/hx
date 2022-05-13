@@ -1,5 +1,3 @@
-
-
 class EmptyCorpusException(Exception):
     """
     Represent exeption which occurs when we get path to an empty folder.
