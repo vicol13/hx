@@ -1,11 +1,8 @@
-from typing import Tuple, Generator,Protocol
+from typing import Tuple, Generator, Protocol
 from pathlib import Path
 from loguru import logger
 from search_engine.core.exceptions import EmptyCorpusException
 from search_engine.core.config import CORPUS_PATH
-
-
-
 
 
 class AbstractCorpusService(Protocol):

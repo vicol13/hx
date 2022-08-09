@@ -14,7 +14,7 @@ class AbstractPreprocesingService(Protocol):
         :rparam doc_name: name of the document
         :rparam doc:   input string which will be tokenized
         :rparam dictionary: represent a default map in case when we want to get new index for current document
-                            or to update and existing index with this document
+        or to update and existing index with this document
         :rtype: dictionary of next format:
         {
             '<word>': {
@@ -37,7 +37,8 @@ class RawPreprocesingService(AbstractPreprocesingService):
         """
         Parse the document remove stop words and return inverted index of document
         """
-        dictionary = dictionary if dictionary else defaultdict(lambda: defaultdict(set))
+        dictionary = dictionary if dictionary else defaultdict(
+            lambda: defaultdict(set))
         starting_index = 0
 
         for phrase in doc.split('.'):

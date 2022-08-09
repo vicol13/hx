@@ -37,7 +37,7 @@ source venv/bin/activate
 ```
 3. install dependencies 
 ```shell
-pip3 install requirements.txt
+pip3 install -r requirements.txt
 ```
 ## Running the algorithm
 
